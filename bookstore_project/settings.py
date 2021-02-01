@@ -128,3 +128,8 @@ STATIC_URL = '/static/'
 
 #############USER CUSTOM MODEL##########
 AUTH_USER_MODEL = 'users.CustomUser'  # new
+
+# Le decime a django a donde enviar al usuario despues
+# de un log in y log out
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
