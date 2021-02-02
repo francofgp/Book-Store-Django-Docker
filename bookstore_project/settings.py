@@ -37,10 +37,25 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # Third-party
+    'crispy_forms',  # new
+
+
     # Local
     'users.apps.UsersConfig',  # new
     'pages.apps.PagesConfig',
 ]
+
+# django-crispy-forms
+CRISPY_TEMPLATE_PACK = 'bootstrap4'  # new
+
+""" To use Crispy Forms we load crispy_forms_tags
+at the top of a template and add {{
+form|crispy }} to replace {{ form.as_p}}
+for displaying form fields. We will take this
+time to also add Bootstrap styling to the Submit button
+ """
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -123,7 +138,26 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+# esto es la URL
 STATIC_URL = '/static/'
+
+# esto es para el local development
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+# production development
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# en teoria esto no es necesario
+""" The last setting is STATICFILES_FINDERS123 which tells Django how to look
+for static
+file directories.
+It is implicitly set for us and although this is an optional
+step, I prefer
+to make it explicit in all projects. """
+
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+]
 
 
 #############USER CUSTOM MODEL##########
