@@ -19,10 +19,18 @@ from django.urls import path, include
 urlpatterns = [
     # Django admin
     path('admin/', admin.site.urls),
+
     # User management
-    path('accounts/', include('django.contrib.auth.urls')),  # new
+    # path('accounts/', include('django.contrib.auth.urls')),  # lo reemplazamos por:
+    path('accounts/', include('allauth.urls')),  # new
+    # Si te preguntas a donde estan los templates
+    # de All Auth, en lugar de templates/registration
+    # estan en templates/account, podriamos eliminar
+    # las otras templates que no uso osea /registration
+
     # Local apps
-    path('accounts/', include('users.urls')),  # new
+    # path('accounts/', include('users.urls')),  # lo sacamos
+    # porque usamos AllAuth que tiene su singup
     path('', include('pages.urls')),
 ]
 

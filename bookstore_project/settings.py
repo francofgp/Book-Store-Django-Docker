@@ -38,14 +38,18 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'django.contrib.sites',  # new
+
     # Third-party
     'crispy_forms',  # new
-
+    'allauth',  # new
+    'allauth.account',  # new
 
     # Local
     'users.apps.UsersConfig',  # new
     'pages.apps.PagesConfig',
 ]
+
 
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = 'bootstrap4'  # new
@@ -68,6 +72,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'bookstore_project.urls'
+
 
 TEMPLATES = [
     {
@@ -160,10 +165,51 @@ STATICFILES_FINDERS = [
 ]
 
 
-#############USER CUSTOM MODEL##########
+# ###########USER CUSTOM MODEL##########
 AUTH_USER_MODEL = 'users.CustomUser'  # new
 
 # Le decime a django a donde enviar al usuario despues
 # de un log in y log out
 LOGIN_REDIRECT_URL = 'home'
-LOGOUT_REDIRECT_URL = 'home'
+
+# esto lo cambiamos porque implementamos el ALLAUTH
+ACCOUNT_LOGOUT_REDIRECT = 'home'  # new
+""" The issue is that django-allauth’s ACCOUNT_LOGOUT_REDIRECT
+actually overrides the
+built-in LOGOUT_REDIRECT_URL, however,
+ since they both point to the homepage this
+change may not be apparent. To future-proof
+our application since maybe we don’t
+want to always redirect to the homepage on logout,
+we should be explicit here with
+the logout redirect. """
+# LOGOUT_REDIRECT_URL = 'home'
+
+# django-allauth config
+SITE_ID = 1  # new
+
+# todo esto de allauth es para usar el email en lugar del
+# usuario
+AUTHENTICATION_BACKENDS = (  # esto esta pero no se ve en realidad
+    # esta under the hood
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',  # new
+)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # new
+
+# es el remember ME
+# si ponemos  "none" aparece el tick
+# si pones True no aparece pero siempre recuerda
+# y False deducilo vos
+# si no escribimos esto implicitamente, esta
+# opcion es como que este en None
+ACCOUNT_SESSION_REMEMBER = True  # new
+
+# de fabria es True, por mas que no escribamos
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False  # new
+
+# para usar el email y no el usuario para log in
+ACCOUNT_USERNAME_REQUIRED = False  # new
+ACCOUNT_AUTHENTICATION_METHOD = 'email'  # new
+ACCOUNT_EMAIL_REQUIRED = True  # new
+ACCOUNT_UNIQUE_EMAIL = True  # new
