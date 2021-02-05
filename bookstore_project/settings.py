@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     # Local
     'users.apps.UsersConfig',  # new
     'pages.apps.PagesConfig',
+    'books.apps.BooksConfig',
 ]
 
 

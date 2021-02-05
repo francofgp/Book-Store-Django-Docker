@@ -32,6 +32,8 @@ urlpatterns = [
     # path('accounts/', include('users.urls')),  # lo sacamos
     # porque usamos AllAuth que tiene su singup
     path('', include('pages.urls')),
+
+    path('books/', include('books.urls')),  # new
 ]
 
 
