@@ -36,8 +36,9 @@ urlpatterns = [
     # path('accounts/', include('users.urls')),  # lo sacamos
     # porque usamos AllAuth que tiene su singup
     path('', include('pages.urls')),
-
     path('books/', include('books.urls')),  # new
+    path('orders/', include('orders.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',  # new
     'pages.apps.PagesConfig',
     'books.apps.BooksConfig',
+    'orders.apps.OrdersConfig',
 ]
 
 
@@ -226,3 +227,7 @@ ACCOUNT_UNIQUE_EMAIL = True  # new
 # ###############
 
 DEFAULT_FROM_EMAIL = 'admin@djangobookstore.com'
+
+
+STRIPE_TEST_PUBLISHABLE_KEY = os.environ.get('STRIPE_TEST_PUBLISHABLE_KEY')
+STRIPE_TEST_SECRET_KEY = os.environ.get('STRIPE_TEST_SECRET_KEY')
