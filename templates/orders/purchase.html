@@ -5,8 +5,7 @@
 <p>Buy for $39.00</p>
 <form action="{% url 'charge' %}" method="post">
     {% csrf_token %}
-    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-        data-key="pk_test_51IIHlSJmLbh1Z5JudJvlF1WQegzeGWzLb1JlTDsf12tkEs4X7pLoo8s1gJqBsqQguQBm3LK2hIIU7sBCymTXMdpQ00Ff6gYRTp"
+    <script src="https://checkout.stripe.com/checkout.js" class="stripe-button" data-key="{{ stripe_key }}"
         data-description="All Books" data-amount="3900" data-locale="auto">
         </script>
 </form>
