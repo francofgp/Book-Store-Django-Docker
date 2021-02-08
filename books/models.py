@@ -22,7 +22,12 @@ class Book(models.Model):
     price = models.DecimalField(max_digits=6, decimal_places=2)
     cover = models.ImageField(upload_to='covers/', blank=True)
 
-    class Meta:  # new
+    class Meta:
+        # para agregar Index a las tablas de BD y aumentar la velocidad
+        # a costa de ocupar mas espacio obviamente
+        indexes = [
+            models.Index(fields=['id'], name='id_index'),
+        ]
         permissions = [
             ('special_status', 'Can read all books'),
         ]

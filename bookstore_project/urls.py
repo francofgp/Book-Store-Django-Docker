@@ -52,3 +52,13 @@ accounts/password_reset/done/ [name='password_reset_done']
 accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']
 accounts/reset/done/ [name='password_reset_complete']
  """
+
+
+# para que las herramientas de perfomance aparezcan solamente
+# en caso de que sea en debug mode
+
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
